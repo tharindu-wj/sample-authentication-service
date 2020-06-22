@@ -1,0 +1,22 @@
+service: sample-auth-service
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-west-2
+
+functions:
+  service:
+    handler: bootloaders/lambda.handler
+    timeout: 15
+    memory: 256
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{any+}
+          method: ANY
+
+plugins:
+  - serverless-offline
